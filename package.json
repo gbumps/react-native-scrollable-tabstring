@@ -1,0 +1,39 @@
+{
+    "name": "react-native-scrollable-tabstring",
+    "version": "3.1.2",
+    "description": "a scrollable list with animated horizontal tab when scrolling",
+    "main": "src/index.js",
+    "directories": {
+      "example": "examples"
+    },
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/hoangthongbui/react-native-scrollable-tabstring"
+    },
+    "keywords": [
+      "react",
+      "tabstring",
+      "native",
+      "scrollable",
+      "horizontal",
+      "animated",
+      "component",
+      "ios",
+      "android"
+    ],
+    "author": "Thong Bui",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/hoangthongbui/react-native-scrollable-tabstring/issues"
+    },
+    "homepage": "https://github.com/hoangthongbui/react-native-scrollable-tabstring/readme",
+    "dependencies": {
+      "prop-types": "^15.5.10"
+    },
+    "devDependencies": {
+      "prettier": "1.18.2"
+    }
+  }
