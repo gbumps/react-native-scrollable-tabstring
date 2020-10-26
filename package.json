@@ -1,6 +1,7 @@
 {
     "name": "react-native-scrollable-tabstring",
     "version": "3.1.2",
+    "private": false,
     "description": "a scrollable list with animated horizontal tab when scrolling",
     "main": "src/index.js",
     "directories": {
@@ -31,9 +32,31 @@
     },
     "homepage": "https://github.com/hoangthongbui/react-native-scrollable-tabstring/readme",
     "dependencies": {
-      "prop-types": "^15.5.10"
+        "npm": "^6.13.7",
+        "prop-types": "^15.7.2",
+        "react": "16.9.0",
+        "react-native": "0.61.5"
+    },
+    "peerDependencies": {
+      "react": "16.9.0"
     },
     "devDependencies": {
-      "prettier": "1.18.2"
+      "@babel/cli": "^7.8.4",
+      "@babel/core": "^7.8.3",
+      "@babel/runtime": "^7.8.3",
+      "@react-native-community/eslint-config": "^0.0.6",
+      "babel-cli": "^6.26.0",
+      "babel-eslint": "^10.0.3",
+      "babel-jest": "^24.9.0",
+      "babel-plugin-module-resolver": "^4.0.0",
+      "eslint": "^6.8.0",
+      "eslint-config-airbnb": "^18.0.1",
+      "eslint-config-airbnb-base": "^14.0.0",
+      "eslint-import-resolver-babel-module": "^5.1.1",
+      "eslint-plugin-import": "^2.20.0",
+      "eslint-plugin-jsx-a11y": "^6.2.3",
+      "eslint-plugin-react": "^7.17.0",
+      "eslint-plugin-react-native": "^3.8.1",
+      "metro-react-native-babel-preset": "^0.56.4",
     }
   }
