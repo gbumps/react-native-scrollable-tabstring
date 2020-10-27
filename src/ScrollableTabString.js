@@ -51,14 +51,14 @@ const ScrollableTabString = ({
     const [selectedScrollIndex, changeSelectedScrollIndex] = useState(0);
     const isPressToScroll = useRef(false);
 
-    const goToIndex = (item) => {
+    const goToIndex = useCallback((item) => {
         isPressToScroll.current = true;
         const findMinYAxis = Math.min(...listViews.filter((i) => i.item.index === item.index).map((ii) => ii.y));
         const res = listViews.find((i) => i.y === findMinYAxis);
-        tabScrollMainRef?.current?.getNode()?.scrollToOffset({ offset: res.y - (heightTabNames.current * 2) });
+        tabScrollMainRef.current.getNode().scrollToOffset({ offset: res.y - (heightTabNames.current * 2) });
         changeSelectedScrollIndex(res.item.index);
         onPressTab && onPressTab(item);
-    };
+    }, []);
 
     const dataTabNameChildren = useCallback(({ item, index }) => React.Children.map(
         React.Children.toArray(renderTabName(item, index)),
@@ -71,7 +71,7 @@ const ScrollableTabString = ({
                 }
             }
         })
-    ), []);
+    ));
 
     const dataSectionsChildren = useCallback(({ item, index }) => React.Children.map(
         React.Children.toArray(renderSection(item, index)),
@@ -86,7 +86,7 @@ const ScrollableTabString = ({
                 }
             }
         })
-    ), []);
+    ));
 
     const onScroll = (e) => {
         onScrollSection && onScrollSection(e);
