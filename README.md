@@ -2,7 +2,10 @@
 
 Scrollable list with animated horizontal tab when scrolling
 
-Parent tab are supported
+Parent Tab and Children Section are supported 
+
+<img src="https://media.giphy.com/media/4vMWOXJFB8Jks2K3Fl/giphy.gif" />
+
 
 ## Installation 
 Install the dependency.
@@ -20,7 +23,25 @@ Start using the components or try it on Snack
 
 ```js
 import ScrollableTabString from 'react-native-scrollable-tabstring';
+//Standard scrollable tab
 <ScrollableTabString
+    onPressTab={() => yourCustomOnPressIfNeeded}
+    dataTabNames={yourTabNamesList}
+    dataSections={yourDataSectionList}
+    renderSection={(item) => yourCustomSectionItemRender} 
+    renderTabName={(item) => yourCustomSectionTabName}
+    selectedTabStyle={{
+        ...your custom styles when a Tab is scrolled to or selected
+    }}
+    unselectedTabStyle={{
+        ...your custom styles when a Tab is normal
+    }}
+/>
+
+//Scrollable tab with parent tab - children sections
+<ScrollableTabString
+    isParent
+    onPressTab={() => yourCustomOnPressIfNeeded}
     dataTabNames={yourTabNamesList}
     dataSections={yourDataSectionList}
     renderSection={(item) => yourCustomSectionItemRender} 
@@ -34,11 +55,26 @@ import ScrollableTabString from 'react-native-scrollable-tabstring';
 />
 ```
 
+## Props
+    [dataTabNames] (#dataTabNames)
+    [dataSections] (#dataSections)
+    [isParent] (#isParent)
+    [tabPosition] (#tabPosition),
+    [renderSectionItem] (#renderSectionItem)
+    [renderTabNameItem] (#renderTabNameItem)
+    [customTabNamesProps] (#customTabNamesProps)
+    [customSectionProps] (#customSectionProps)
+    [onPressTab] (#onPressTab)
+    [onScrollSection] (#onScrollSection)
+    [selectedTabStyle] (#selectedTabStyle)
+    [unselectedTabStyle] (#unselectedTabStyle)
+
 ## Example
 ### Scrollable tab
 
-Display a basic customizable scrollable tab 
-the length of 2 lists must equal, otherwise may result in incorrect scrolling order
+Display a basic customizable scrollable tab
+
+Length of `dataTabNames` and `dataSections` must equal, otherwise may result in incorrect scrolling order
 
 <img src="https://media.giphy.com/media/4vMWOXJFB8Jks2K3Fl/giphy.gif" />
 
@@ -51,7 +87,7 @@ the length of 2 lists must equal, otherwise may result in incorrect scrolling or
     title: 'Tab 6',
 }];
 
-const dataMain = [
+const dataSections = [
     {
         name: 'Section 1',
         data: [..........]
@@ -67,7 +103,7 @@ const dataMain = [
 const ScrollableTabStringDemo = () => (
     <ScrollableTabString
         dataTabNames={tabNames}
-        dataSections={dataMain}
+        dataSections={dataSections}
         renderSection={(item) => (
             <View>
                 <Text.H3>{item.name}</Text.H3>
@@ -99,13 +135,12 @@ const ScrollableTabStringDemo = () => (
     />
 );
 ```
-### Scrollable tab with parent tab 
+
+### Scrollable tab with parent tab
 
 Scrollable tab with parent tab - children section 
 
-Remember to map exact parent index with child index from both lists, all must be sorted by index from 0 and remember to add param `isParent=true` 
-
-Otherwise may result in incorrect scrolling order
+Remember to map exact parent index with child index from both lists, all must be sorted by index from 0 and add param `isParent=true` 
 
 For example Tab 1 has 2 children sections. They are Section 1 and Section 2 -> index of Tab 1, Section 1 and 2 are 0
 
@@ -122,7 +157,7 @@ const tabNames = [{
     index: 5
 }];
 
-const dataMain = [
+const dataSections = [
     {
         name: 'Section 1',
         index: 0,
@@ -169,7 +204,7 @@ const ScrollableTabStringDemo = () => (
     <ScrollableTabString
         isParent
         dataTabNames={tabNames}
-        dataSections={dataMain}
+        dataSections={dataSections}
         renderSection={(item) => (
             <View>
                 <Text.H3>{item.name}</Text.H3>
@@ -194,14 +229,15 @@ const ScrollableTabStringDemo = () => (
             margin: 10
         }}
         unselectedTabStyle={{
-            contentContainerStyle: {
-                backgroundColor: Colors.white,
-                alignItems: 'center',
-                justifyContent: 'center',
-            }
+            backgroundColor: Colors.white,
+            alignItems: 'center',
+            justifyContent: 'center',
         }}
     />
 );
 ```
+## Conclusion
+
+
 
 
