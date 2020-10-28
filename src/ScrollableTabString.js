@@ -2,10 +2,20 @@ import React, { Component } from 'react';
 import {
     Animated,
     View,
-    Platform
+    Platform,
+    StyleSheet
 } from 'react-native';
 
 import PropTypes from 'prop-types';
+
+
+const styles = StyleSheet.create({
+    horizontalTabStyle: {
+        backgroundColor: 'white',
+        alignItems: 'center',
+        width: '100%'
+    }
+})
 
 const binarySearch = (arr, element) => {
     let right = arr.length - 1;
@@ -50,10 +60,11 @@ class ScrollableTabString extends Component {
     goToIndex(item) {
         const { tabScrollMainRef, isPressToScroll, heightTabNames } = this;
         const { onPressTab } = this.props;
+
         isPressToScroll.current = true;
         const findMinYAxis = Math.min(...listViews.filter((i) => i.item.index === item.index).map((ii) => ii.y));
         const res = listViews.find((i) => i.y === findMinYAxis);
-        tabScrollMainRef.current.getNode().scrollToOffset({ offset: res.y - (heightTabNames.current * 2) });
+        tabScrollMainRef?.current?.scrollToOffset({ offset: res.y - (heightTabNames.current * 2) });
         this.setState({
             selectedScrollIndex: res.item.index
         });
@@ -64,7 +75,7 @@ class ScrollableTabString extends Component {
         const { renderTabName, selectedTabStyle, unselectedTabStyle } = this.props;
         const { heightTabNames } = this;
         const { selectedScrollIndex } = this.state;
-        React.Children.map(
+        return React.Children.map(
             React.Children.toArray(renderTabName(item, index)),
             (children) => React.cloneElement(children, {
                 style: { ...(index === selectedScrollIndex) ? selectedTabStyle : unselectedTabStyle },
@@ -80,7 +91,7 @@ class ScrollableTabString extends Component {
 
     dataSectionsChildren({ item, index }) {
         const { renderSection, dataSections } = this.props;
-        React.Children.map(
+        return React.Children.map(
             React.Children.toArray(renderSection(item, index)),
             (children) => React.cloneElement(children, {
                 onLayout: (e) => {
@@ -97,14 +108,14 @@ class ScrollableTabString extends Component {
     }
 
     onScroll(e) {
-        const { onScrollSection, dataTabs } = this.props;
+        const { onScrollSection, dataTabs, isAnimatedHeader } = this.props;
         const { tabNamesRef, isPressToScroll } = this;
         const { selectedScrollIndex } = this.state;
 
         onScrollSection && onScrollSection(e);
-        if (!isPressToScroll.current) {
+        if (!isPressToScroll.current && isAnimatedHeader) {
             if (e.nativeEvent.contentOffset.y === 0) {
-                tabNamesRef?.current?.getNode().scrollToOffset({
+                tabNamesRef?.current?.scrollToOffset({
                     offset: 0,
                     animated: Platform.OS === 'ios',
                     viewPosition: 0.5,
@@ -114,7 +125,7 @@ class ScrollableTabString extends Component {
                 });
             } else if (isCloseToBottom(e.nativeEvent)) {
                 const lastIndex = dataTabs.length - 1;
-                tabNamesRef?.current?.getNode().scrollToIndex({
+                tabNamesRef?.current?.scrollToIndex({
                     animated: Platform.OS === 'ios',
                     index: lastIndex,
                     viewPosition: 0.5,
@@ -128,7 +139,7 @@ class ScrollableTabString extends Component {
                     ? listViews[Math.max(...res)]?.item?.index
                     : Math.max(listViews[res[0]]?.item?.index, listViews[res[1]]?.item?.index);
                 if (indexToScrollTo && indexToScrollTo !== -1 && indexToScrollTo !== selectedScrollIndex) {
-                    tabNamesRef?.current?.getNode().scrollToIndex({
+                    tabNamesRef?.current?.scrollToIndex({
                         animated: Platform.OS === 'ios',
                         index: indexToScrollTo,
                         viewPosition: 0.5,
@@ -177,11 +188,7 @@ class ScrollableTabString extends Component {
                             keyboardShouldPersistTaps="always"
                             showsHorizontalScrollIndicator={false}
                             bounces={false}
-                            contentContainerStyle={{
-                                backgroundColor: 'white',
-                                alignItems: 'center',
-                                width: '100%'
-                            }}
+                            contentContainerStyle={styles.horizontalTabStyle}
                             horizontal
                             renderItem={dataTabNameChildren}
                         />
@@ -199,11 +206,7 @@ class ScrollableTabString extends Component {
                             keyboardShouldPersistTaps="always"
                             showsHorizontalScrollIndicator={false}
                             bounces={false}
-                            contentContainerStyle={{
-                                backgroundColor: 'white',
-                                alignItems: 'center',
-                                width: '100%'
-                            }}
+                            contentContainerStyle={styles.horizontalTabStyle}
                             horizontal
                             renderItem={dataTabNameChildren}
                         />
@@ -219,6 +222,7 @@ ScrollableTabString.propTypes = {
     dataTabs: PropTypes.array,
     dataSections: PropTypes.array,
     isParent: PropTypes.bool,
+    isAnimatedHeader: PropTypes.bool,
     tabPosition: PropTypes.oneOf(['top', 'bottom']),
     renderSection: PropTypes.func,
     renderTabName: PropTypes.func,
@@ -234,6 +238,7 @@ ScrollableTabString.defaultProps = {
     dataSections: [],
     dataTabs: [],
     isParent: false,
+    isAnimatedHeader: true,
     tabPosition: 'top',
 };
 
