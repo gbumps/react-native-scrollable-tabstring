@@ -177,11 +177,9 @@ const ScrollableTabStringDemo = () => (
             margin: 10
         }}
         unselectedTabStyle={{
-            contentContainerStyle: {
-                backgroundColor: 'black',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }
+            backgroundColor: 'black',
+            alignItems: 'center',
+            justifyContent: 'center',
         }}
     />
 );
