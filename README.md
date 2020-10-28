@@ -1,8 +1,6 @@
 # react-native-scrollable-tabstring
 
-Scrollable list with animated horizontal tab when scrolling
-
-Parent Tab and Children Section are supported 
+A ScrollView-like component with animated horizontal tab when scrolling
 
 <img src="https://media.giphy.com/media/4vMWOXJFB8Jks2K3Fl/giphy.gif" />
 
@@ -16,7 +14,7 @@ $ npm install react-native-scrollable-tabstring
 $ yarn add react-native-scrollable-tabstring
 ```
 
-## Usage
+## Basic Usage
 
 Start using the components or try it on Snack
 [here](https://snack.expo.io).
@@ -26,23 +24,7 @@ import ScrollableTabString from 'react-native-scrollable-tabstring';
 //Standard scrollable tab
 <ScrollableTabString
     onPressTab={() => yourCustomOnPressIfNeeded}
-    dataTabNames={yourTabNamesList}
-    dataSections={yourDataSectionList}
-    renderSection={(item) => yourCustomSectionItemRender} 
-    renderTabName={(item) => yourCustomSectionTabName}
-    selectedTabStyle={{
-        ...your custom styles when a Tab is scrolled to or selected
-    }}
-    unselectedTabStyle={{
-        ...your custom styles when a Tab is normal
-    }}
-/>
-
-//Scrollable tab with parent tab - children sections
-<ScrollableTabString
-    isParent
-    onPressTab={() => yourCustomOnPressIfNeeded}
-    dataTabNames={yourTabNamesList}
+    dataTabs={yourTabNamesList}
     dataSections={yourDataSectionList}
     renderSection={(item) => yourCustomSectionItemRender} 
     renderTabName={(item) => yourCustomSectionTabName}
@@ -55,26 +37,28 @@ import ScrollableTabString from 'react-native-scrollable-tabstring';
 />
 ```
 
-## Props
-    [dataTabNames] (#dataTabNames)
-    [dataSections] (#dataSections)
-    [isParent] (#isParent)
-    [tabPosition] (#tabPosition),
-    [renderSectionItem] (#renderSectionItem)
-    [renderTabNameItem] (#renderTabNameItem)
-    [customTabNamesProps] (#customTabNamesProps)
-    [customSectionProps] (#customSectionProps)
-    [onPressTab] (#onPressTab)
-    [onScrollSection] (#onScrollSection)
-    [selectedTabStyle] (#selectedTabStyle)
-    [unselectedTabStyle] (#unselectedTabStyle)
+## Usage
+| Property            | Type    | Required | Description |
+| ------------------- | ------- | -------- | ----------- |
+| dataTabs            | Array   | Yes      | A tab list to represent |
+| dataSections        | Array   | Yes      | A Section list to represent |
+| isParent            | Boolean | No       | A key to render Parent tab - children section, Default to `false` |
+| tabPosition         | String  | No       | Tab arrangement, Default to `top` |
+| renderSectionItem   | Func    | Yes      | Function to render Section Item, equal to `renderItem` in `Flatlist` of `react-native` |
+| renderTabNameItem   | Func    | Yes      | Function to render Tab Item, equal to `renderItem` in `Flatlist` of `react-native` |
+| customTabNamesProps | Object  | No       | Custom `Flatlist` Props (**) |
+| customSectionProps  | Object  | No       | Custom `Flatlist` Props (**) |
+| onPressTab          | Func    | No       | Custom function when pressing on a tab |
+| onScrollSection     | Func    | No       |
+| selectedTabStyle    | Object  | No       | 
+| unselectedTabStyle  | Object  | No       |
 
 ## Example
 ### Scrollable tab
 
 Display a basic customizable scrollable tab
 
-Length of `dataTabNames` and `dataSections` must equal, otherwise may result in incorrect scrolling order
+Length of `dataTabs` and `dataSections` must equal, otherwise may result in incorrect scrolling order
 
 <img src="https://media.giphy.com/media/4vMWOXJFB8Jks2K3Fl/giphy.gif" />
 
@@ -102,7 +86,7 @@ const dataSections = [
 
 const ScrollableTabStringDemo = () => (
     <ScrollableTabString
-        dataTabNames={tabNames}
+        dataTabs={tabNames}
         dataSections={dataSections}
         renderSection={(item) => (
             <View>
@@ -203,7 +187,7 @@ const dataSections = [
 const ScrollableTabStringDemo = () => (
     <ScrollableTabString
         isParent
-        dataTabNames={tabNames}
+        dataTabs={tabNames}
         dataSections={dataSections}
         renderSection={(item) => (
             <View>
@@ -236,7 +220,11 @@ const ScrollableTabStringDemo = () => (
     />
 );
 ```
-## Conclusion
+## Contributing
+All contributions are welcome! Please open an issue if you get stuck and bugs, or open a pull request if you have any feature idea, i'm very appreciate. 
+
+## License
+MIT
 
 
 
