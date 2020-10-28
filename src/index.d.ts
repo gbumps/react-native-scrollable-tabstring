@@ -6,7 +6,7 @@ interface ScrollableTabStringProps {
     dataTabs: Array<Object>,
     dataSections: Array<Object>,
     isParent: boolean,
-    isAnimated: boolean,
+    isAnimatedHeader: boolean,
     tabPosition?: 'top' | 'bottom',
     renderSectionItem: Function,
     renderTabNameItem: Function,
