@@ -38,7 +38,7 @@ import ScrollableTabString from 'react-native-scrollable-tabstring';
 ### Scrollable tab
 
 Display a basic customizable scrollable tab 
-`tabNames` length and `dataMain` length must equal, otherwise may result in incorrect scrolling order
+the length of 2 lists must equal, otherwise may result in incorrect scrolling order
 
 <img src="https://media.giphy.com/media/4vMWOXJFB8Jks2K3Fl/giphy.gif" />
 
