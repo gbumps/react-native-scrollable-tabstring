@@ -240,6 +240,15 @@ ScrollableTabString.defaultProps = {
     isParent: false,
     isAnimatedHeader: true,
     tabPosition: 'top',
+    selectedTabStyle: {
+        borderBottomColor: 'black',
+        borderBottomWidth: 1,
+    },
+    unselectedTabStyle: {
+        backgroundColor: 'transparent',
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
 };
 
 export default ScrollableTabString;
