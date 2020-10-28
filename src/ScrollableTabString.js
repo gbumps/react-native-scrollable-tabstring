@@ -183,7 +183,6 @@ class ScrollableTabString extends Component {
                             data={dataTabs.map((i, index) => ({ ...i, index }))}
                             {...customTabNamesProps}
                             ref={tabNamesRef}
-                            initialNumToRender={dataTabs.length}
                             keyExtractor={(item) => item.index}
                             keyboardShouldPersistTaps="always"
                             showsHorizontalScrollIndicator={false}
