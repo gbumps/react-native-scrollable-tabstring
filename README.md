@@ -1,6 +1,7 @@
-<p align="center">
+<p align="left">
   <a href="https://github.com/prettier/prettier"><img src="https://img.shields.io/badge/styled_with-prettier-ff69b4.svg"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
+  <a href="https://aleen42.github.io/badges/src/eslint.svg"><img src="https://aleen42.github.io/badges/src/eslint.svg"></a>
 </p>
 
 <img src="https://media.giphy.com/media/4vMWOXJFB8Jks2K3Fl/giphy.gif" />
@@ -18,7 +19,7 @@ $ npm install react-native-scrollable-tabstring
 $ yarn add react-native-scrollable-tabstring
 ```
 
-## Basic Usage
+## Usage
 
 Start using the components or try it on Snack
 [here](https://snack.expo.io).
@@ -41,21 +42,26 @@ import ScrollableTabString from 'react-native-scrollable-tabstring';
 />
 ```
 
-## Usage
+## Component Detail
+This component currently support tab list for **horizontal** side and vertical section list. Both of which are __**[Flatlist](https://facebook.github.io/react-native/docs/flatlist)**__
+
+(*) Remember to avoid item like `renderItem`, `data`, `ref`, `onScroll` as may result in incorrect scrolling order or app crash.
+
 | Property            | Type    | Required | Description |
 | ------------------- | ------- | -------- | ----------- |
 | dataTabs            | Array   | Yes      | A tab list to represent |
 | dataSections        | Array   | Yes      | A Section list to represent |
 | isParent            | Boolean | No       | A key to render Parent tab - children section, Default to `false` |
-| tabPosition         | String  | No       | Tab arrangement, Default to `top` |
-| renderSectionItem   | Func    | Yes      | Function to render Section Item, equal to `renderItem` in `Flatlist` of `react-native` |
-| renderTabNameItem   | Func    | Yes      | Function to render Tab Item, equal to `renderItem` in `Flatlist` of `react-native` |
-| customTabNamesProps | Object  | No       | Custom `Flatlist` Props (**) |
-| customSectionProps  | Object  | No       | Custom `Flatlist` Props (**) |
+| isAnimatedHeader    | Boolean | No       | Animation at tab header when section scrolling, Default to `true` |
+| tabPosition         | String  | No       | Tab list position arrangement, `top` and `bottom`, Default to `top` |
+| renderSectionItem   | Func    | Yes      | Function to render Section Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
+| renderTabNameItem   | Func    | Yes      | Function to render Tab Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
+| customTabNamesProps | Object  | No       | Custom `Flatlist` Props (*) |
+| customSectionProps  | Object  | No       | Custom `Flatlist` Props (*) |
 | onPressTab          | Func    | No       | Custom function when pressing on a tab |
-| onScrollSection     | Func    | No       |
-| selectedTabStyle    | Object  | No       | 
-| unselectedTabStyle  | Object  | No       |
+| onScrollSection     | Func    | No       | Custom function when scrolling |
+| selectedTabStyle    | Object  | No       | Custom style when a tab is selected |
+| unselectedTabStyle  | Object  | No       | Custom style when a tab is unselected | 
 
 ## Example
 ### Scrollable tab
