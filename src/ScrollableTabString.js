@@ -6,7 +6,6 @@ import {
 } from 'react-native';
 
 import PropTypes from 'prop-types';
-import Colors from '../../colors';
 
 const binarySearch = (arr, element) => {
     let right = arr.length - 1;
@@ -139,7 +138,7 @@ const ScrollableTabString = ({
                 CellRendererComponent={dataSectionsChildren}
                 ListHeaderComponent={tabPosition === 'top' ? (
                     <Animated.FlatList
-                        data={isParent ? dataTabNames : dataTabNames.map((i, index) => ({ ...i, index }))}
+                        data={dataTabNames.map((i, index) => ({ ...i, index }))}
                         {...customTabNamesProps}
                         ref={tabNamesRef}
                         initialNumToRender={dataTabNames.length}
@@ -148,7 +147,7 @@ const ScrollableTabString = ({
                         showsHorizontalScrollIndicator={false}
                         bounces={false}
                         contentContainerStyle={{
-                            backgroundColor: Colors.white,
+                            backgroundColor: 'white',
                             alignItems: 'center',
                             width: '100%'
                         }}
@@ -161,7 +160,7 @@ const ScrollableTabString = ({
                 (tabPosition === 'bottom' ? (
                     <Animated.FlatList
                         style={{ position: 'absolute', bottom: 0 }}
-                        data={isParent ? dataTabNames : dataTabNames.map((i, index) => ({ ...i, index }))}
+                        data={dataTabNames.map((i, index) => ({ ...i, index }))}
                         {...customTabNamesProps}
                         ref={tabNamesRef}
                         initialNumToRender={dataTabNames.length}
@@ -170,7 +169,7 @@ const ScrollableTabString = ({
                         showsHorizontalScrollIndicator={false}
                         bounces={false}
                         contentContainerStyle={{
-                            backgroundColor: Colors.white,
+                            backgroundColor: 'white',
                             alignItems: 'center',
                             width: '100%'
                         }}
