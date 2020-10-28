@@ -1,9 +1,13 @@
-# react-native-scrollable-tabstring
-
-A ScrollView-like component with animated horizontal tab when scrolling
+<p align="center">
+  <a href="https://github.com/prettier/prettier"><img src="https://img.shields.io/badge/styled_with-prettier-ff69b4.svg"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
+</p>
 
 <img src="https://media.giphy.com/media/4vMWOXJFB8Jks2K3Fl/giphy.gif" />
 
+A ScrollView-like component with animated horizontal tab when scrolling
+
+# Get started
 
 ## Installation 
 Install the dependency.
