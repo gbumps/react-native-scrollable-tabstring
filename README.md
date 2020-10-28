@@ -13,7 +13,6 @@ $ npm install react-native-scrollable-tabstring
 $ yarn add react-native-scrollable-tabstring
 ```
 
-
 ## Usage
 
 Start using the components or try it on Snack
@@ -21,7 +20,18 @@ Start using the components or try it on Snack
 
 ```js
 import ScrollableTabString from 'react-native-scrollable-tabstring';
-
+<ScrollableTabString
+    dataTabNames={yourTabNamesList}
+    dataSections={yourDataSectionList}
+    renderSection={(item) => yourCustomSectionItemRender} 
+    renderTabName={(item) => yourCustomSectionTabName}
+    selectedTabStyle={{
+        ...your custom styles when a Tab is scrolled to or selected
+    }}
+    unselectedTabStyle={{
+        ...your custom styles when a Tab is normal
+    }}
+/>
 ```
 
 ## Example
@@ -89,13 +99,15 @@ const ScrollableTabStringDemo = () => (
     />
 );
 ```
-### Scrollable with parent tab 
+### Scrollable tab with parent tab 
 
-Display a customizable scrollable tab with parent tab - children section 
+Scrollable tab with parent tab - children section 
 
-(remember to map exact parent index with child index, all must be sorted by index from 0 and remember to add key `isParent=true` otherwise may result in incorrect scrolling order)
+Remember to map exact parent index with child index from both lists, all must be sorted by index from 0 and remember to add param `isParent=true` 
 
-For example Tab 1 has 2 children section. They are Section 1 and Section 2 -> index of tab 1, Section 1 and 2 are 0
+Otherwise may result in incorrect scrolling order
+
+For example Tab 1 has 2 children sections. They are Section 1 and Section 2 -> index of Tab 1, Section 1 and 2 are 0
 
 <img src="https://media.giphy.com/media/XOgtvUrZd2xxE3W1vu/giphy.gif" />
 
