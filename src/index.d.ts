@@ -3,9 +3,10 @@ import React from 'react'
 import { StyleProp, ViewStyle, FlatListProps, StyleProp, FlatListProps } from 'react-native';
 
 interface ScrollableTabStringProps {
-    dataTabNames: Array<Object>,
+    dataTabs: Array<Object>,
     dataSections: Array<Object>,
     isParent: boolean,
+    isAnimated: boolean,
     tabPosition?: 'top' | 'bottom',
     renderSectionItem: Function,
     renderTabNameItem: Function,
