@@ -8,14 +8,13 @@ import {
 
 import PropTypes from 'prop-types';
 
-
 const styles = StyleSheet.create({
     horizontalTabStyle: {
         backgroundColor: 'white',
         alignItems: 'center',
         width: '100%'
     }
-})
+});
 
 const binarySearch = (arr, element) => {
     let right = arr.length - 1;
