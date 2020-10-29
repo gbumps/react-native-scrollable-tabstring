@@ -74,6 +74,7 @@ class ScrollableTabString extends Component {
         const { renderTabName, selectedTabStyle, unselectedTabStyle } = this.props;
         const { heightTabNames } = this;
         const { selectedScrollIndex } = this.state;
+
         return React.Children.map(
             React.Children.toArray(renderTabName(item, index)),
             (children) => React.cloneElement(children, {
@@ -90,6 +91,7 @@ class ScrollableTabString extends Component {
 
     dataSectionsChildren({ item, index }) {
         const { renderSection, dataSections } = this.props;
+
         return React.Children.map(
             React.Children.toArray(renderSection(item, index)),
             (children) => React.cloneElement(children, {
