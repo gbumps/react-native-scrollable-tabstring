@@ -46,7 +46,21 @@ import ScrollableTabString from 'react-native-scrollable-tabstring';
 This component currently support tab list for **horizontal** side and vertical section list. Both of which are __**[Flatlist](https://facebook.github.io/react-native/docs/flatlist)**__
 
 (*) Remember to avoid item like `renderItem`, `data`, `ref`, `onScroll` as may result in incorrect scrolling order or app crash.
-
+(**) Default of selectedTabStyle 
+```js
+    {
+        borderBottomColor: 'black',
+        borderBottomWidth: 1,
+    }
+```
+(***) Default of unselectedTabStyle
+```js
+    {
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+```
 | Property            | Type    | Required | Description |
 | ------------------- | ------- | -------- | ----------- |
 | dataTabs            | Array   | Yes      | A tab list to represent |
@@ -60,8 +74,8 @@ This component currently support tab list for **horizontal** side and vertical s
 | customSectionProps  | Object  | No       | Custom `Flatlist` Props (*) |
 | onPressTab          | Func    | No       | Custom function when pressing on a tab |
 | onScrollSection     | Func    | No       | Custom function when scrolling |
-| selectedTabStyle    | Object  | No       | Custom style when a tab is selected |
-| unselectedTabStyle  | Object  | No       | Custom style when a tab is unselected | 
+| selectedTabStyle    | Object  | No       | Custom style when a tab is selected (**) |
+| unselectedTabStyle  | Object  | No       | Custom style when a tab is unselected (***) | 
 
 ## Example
 ### Scrollable tab
