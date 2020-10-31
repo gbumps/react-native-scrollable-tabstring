@@ -132,7 +132,7 @@ render () {
 };
 ```
 
-### Scrollable tab with parent tab (#scrollable-tab-with-parent-tab)
+###Scrollable tab with parent tab (#scrollable-tab-with-parent-tab)
 
 Scrollable tab with parent tab and children sections follow
 
