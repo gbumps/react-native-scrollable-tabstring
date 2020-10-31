@@ -46,16 +46,16 @@ import ScrollableTabString from 'react-native-scrollable-tabstring';
 This component currently support tab list for **horizontal** side and vertical section list. Both of which are __**[Flatlist](https://facebook.github.io/react-native/docs/flatlist)**__
 
 | Property | Type | Required | Default | Description |
-| ------------------- | ------- | -------- | ---------- | ----------- |
+| -------- | ---- | -------- | ------- | ----------- |
 | dataTabs | Array | Yes | [] | A tab list to represent |
 | dataSections | Array | Yes | [] | A Section list to represent |
-| isParent | Boolean | No | false | Render more sections folling a parent tab, Switch to `true` if you want to support more sections following a tab, see detail [here](https://github.com/hoangthongbui/react-native-scrollable-tabstring#scrollable-tab-with-parent-tab) on how to use |
+| isParent | Boolean | No | false | Render more sections following by a parent tab, Switch to `true` if you want to support more sections following by a parent tab, see detail [here](https://github.com/hoangthongbui/react-native-scrollable-tabstring#scrollable-tab-with-parent-tab) on how to use |
 | isAnimatedHeader | Boolean | No | true | Animation at tab header when section scrolling |
 | tabPosition | String | No | top | Tab list position arrangement, `top` and `bottom` |
 | renderSectionItem | Func | Yes | | Function to render Section Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
 | renderTabNameItem | Func | Yes | | Function to render Tab Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
-| customTabNamesProps | Object | No | | [Flalist](https://reactnative.dev/docs/flatlist) Props, avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result some issues |
-| customSectionProps  | Object  | No | | [Flalist](https://reactnative.dev/docs/flatlist) Props, avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result some issues |
+| customTabNamesProps | Object | No | | [Flatlist](https://reactnative.dev/docs/flatlist) Props, avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result some issues |
+| customSectionProps  | Object  | No | | [Flatlist](https://reactnative.dev/docs/flatlist) Props, avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result some issues |
 | onPressTab | Func | No | | Custom function when pressing on a tab |
 | onScrollSection | Func | No | | Custom function when section scrolling |
 | selectedTabStyle | Object | No | `{ borderBottomColor: 'black', borderBottomWidth: 1, }` | Custom style when a tab is selected |
@@ -134,13 +134,15 @@ render () {
 
 ### Scrollable tab with parent tab
 
-Scrollable tab with parent tab and children sections follow
+Scrollable tab with parent tab and children section follow
 
 Use this if you want to support more sections following on a tab.
 
-Add `index` key of a section you want
+Add `index` key to parent tab and sections (start from 0). For example Tab 1 has 2 children section follow. They are Section 1 and Section 2 -> index of Tab 1, Section 1 and 2 are 0
 
-For example Tab 1 has 2 children sections follow. They are Section 1 and Section 2 -> index of Tab 1, Section 1 and 2 are 0
+```text
+Note: Index of both parent and children section must equivalent and those sections must be adjacent.
+```
 
 <img src="https://media.giphy.com/media/XOgtvUrZd2xxE3W1vu/giphy.gif" />
 
@@ -235,7 +237,7 @@ const ScrollableTabStringDemo = () => (
 );
 ```
 ## Contributing
-All contributions are welcome! Please open an issue if you get stuck and bugs, or open a pull request if you have any feature idea, i'm very appreciate. 
+All contributions are welcome! Please open an issue if you get stuck and bugs, or a PR if you have any feature idea, improvements and bug fixing. I'm very appreciate ! 
 
 ## License
 MIT
