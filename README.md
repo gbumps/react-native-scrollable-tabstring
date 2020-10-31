@@ -49,7 +49,7 @@ This component currently support tab list for **horizontal** side and vertical s
 | ------------------- | ------- | -------- | ---------- |----------- |
 | dataTabs            | Array   | Yes      |     []     | A tab list to represent |
 | dataSections        | Array   | Yes      |     []     | A Section list to represent |
-| isParent            | Boolean | No       |   false    | A key to render Parent tab - children section, switch to `true` if you want to support more sections following a tab, see [here](#scrollable-tab-with-parent-tab) on how to use it |
+| isParent            | Boolean | No       |   false    | A key to render Parent tab - children section, switch to `true` if you want to support more sections following a tab, see [here](###scrollable-tab-with-parent-tab) on how to use it |
 | isAnimatedHeader    | Boolean | No       |   true     | Animation at tab header when section scrolling |
 | tabPosition         | String  | No       |   top      | Tab list position arrangement, `top` and `bottom` |
 | renderSectionItem   | Func    | Yes      |            | Function to render Section Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
@@ -132,7 +132,7 @@ render () {
 };
 ```
 
-###Scrollable tab with parent tab (#scrollable-tab-with-parent-tab)
+### Scrollable tab with parent tab
 
 Scrollable tab with parent tab and children sections follow
 
