@@ -34,7 +34,7 @@ import ScrollableTabString from 'react-native-scrollable-tabstring';
     renderSection={(item) => yourCustomSectionItemRender} 
     renderTabName={(item) => yourCustomSectionTabName}
     selectedTabStyle={{
-        ...your custom styles when a Tab is scrolled to or selected
+        ...your custom styles when a Tab is scrolled to or tapped
     }}
     unselectedTabStyle={{
         ...your custom styles when a Tab is normal
@@ -45,34 +45,28 @@ import ScrollableTabString from 'react-native-scrollable-tabstring';
 ## Component Detail
 This component currently support tab list for **horizontal** side and vertical section list. Both of which are __**[Flatlist](https://facebook.github.io/react-native/docs/flatlist)**__
 
-(*) Remember to avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result in incorrect scrolling order or app crash.
-
-The `dataSections` not support `onLoadMore` yet due to heavily calculated. I'm still working on this (Make a PR for me if you know how to do so);
-
-You can load the Tab list with the sections to the end of the list, and change `isAnimatedHeader` to `false` instead if you still want to support `onLoadMore`
-
 | Property            | Type    | Required |  Default   | Description |
 | ------------------- | ------- | -------- | ---------- |----------- |
 | dataTabs            | Array   | Yes      |     []     | A tab list to represent |
 | dataSections        | Array   | Yes      |     []     | A Section list to represent |
-| isParent            | Boolean | No       |   false    | A key to render Parent tab - children section, Default to `false` |
-| isAnimatedHeader    | Boolean | No       |   true     | Animation at tab header when section scrolling, Default to `true` |
-| tabPosition         | String  | No       |   top      | Tab list position arrangement, `top` and `bottom`, Default to `top` |
+| isParent            | Boolean | No       |   false    | A key to render Parent tab - children section, switch to `true` if you want to support more sections following a tab, see [here](#scrollable-tab-with-parent-tab) on how to use it |
+| isAnimatedHeader    | Boolean | No       |   true     | Animation at tab header when section scrolling |
+| tabPosition         | String  | No       |   top      | Tab list position arrangement, `top` and `bottom` |
 | renderSectionItem   | Func    | Yes      |            | Function to render Section Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
 | renderTabNameItem   | Func    | Yes      |            | Function to render Tab Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
-| customTabNamesProps | Object  | No       |            | Custom `Flatlist` Props (*) |
-| customSectionProps  | Object  | No       |            | Custom `Flatlist` Props (*) |
+| customTabNamesProps | Object  | No       |            | [Flalist](https://reactnative.dev/docs/flatlist) Props, avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result some issues |
+| customSectionProps  | Object  | No       |            | [Flalist](https://reactnative.dev/docs/flatlist) Props, avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result some issues |
 | onPressTab          | Func    | No       |            | Custom function when pressing on a tab |
-| onScrollSection     | Func    | No       |            | Custom function when scrolling |
+| onScrollSection     | Func    | No       |            | Custom function when section scrolling |
 | selectedTabStyle    | Object  | No       | `{ borderBottomColor: 'black', borderBottomWidth: 1, }` | Custom style when a tab is selected |
 | unselectedTabStyle  | Object  | No       | `{ backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', }` | Custom style when a tab is unselected | 
 
 ## Example
 ### Scrollable tab
 
-Display a basic customizable scrollable tab
+Display a basic scrollable tab
 
-Length of `dataTabs` and `dataSections` must equal, otherwise may result in incorrect scrolling order
+<!---Note: Length of `dataTabs` and `dataSections` must equal, otherwise may result in incorrect scrolling order`-->
 
 <img src="https://media.giphy.com/media/4vMWOXJFB8Jks2K3Fl/giphy.gif" />
 
@@ -98,49 +92,52 @@ const dataSections = [
     },
 ];
 
-const ScrollableTabStringDemo = () => (
-    <ScrollableTabString
-        dataTabs={tabNames}
-        dataSections={dataSections}
-        renderSection={(item) => (
-            <View>
-                <Text.H3>{item.name}</Text.H3>
-                {
-                    item.data.map((i) => (
-                        <Text key={i.id} style={{ padding: 20 }}>{i.name}</Text>
-                    ))
-                }
-            </View>
-        )}
-        renderTabName={(item) => (
-            <TouchableOpacity>
-                <Text.H4 style={{ padding: 10 }}>
-                    {item.title}
-                </Text.H4>
-            </TouchableOpacity>
-        )}
-        selectedTabStyle={{
-            borderColor: Colors.brown_grey,
-            borderRadius: 10,
-            borderWidth: 1,
-            margin: 10
-        }}
-        unselectedTabStyle={{
-            backgroundColor: Colors.white,
-            alignItems: 'center',
-            justifyContent: 'center',
-        }}
-    />
-);
+render () {
+    return (
+        <ScrollableTabString
+            dataTabs={tabNames}
+            dataSections={dataSections}
+            renderSection={(item) => (
+                <View>
+                    <Text.H3>{item.name}</Text.H3>
+                    {
+                        item.data.map((i) => (
+                            <Text key={i.id} style={{ padding: 20 }}>{i.name}</Text>
+                        ))
+                    }
+                </View>
+            )}
+            renderTabName={(item) => (
+                <TouchableOpacity>
+                    <Text.H4 style={{ padding: 10 }}>
+                        {item.title}
+                    </Text.H4>
+                </TouchableOpacity>
+            )}
+            selectedTabStyle={{
+                borderColor: Colors.brown_grey,
+                borderRadius: 10,
+                borderWidth: 1,
+                margin: 10
+            }}
+            unselectedTabStyle={{
+                backgroundColor: Colors.white,
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}
+        />
+    )
+};
 ```
 
-### Scrollable tab with parent tab
+### Scrollable tab with parent tab (#scrollable-tab-with-parent-tab)
 
-Scrollable tab with parent tab - children section 
+Scrollable tab with parent tab and children sections follow
 
-Remember to map exact parent index with child index from both lists, all must be sorted by index from 0 and add param `isParent=true` 
+Use this if you want to support more sections following on a tab.
 
-For example Tab 1 has 2 children sections. They are Section 1 and Section 2 -> index of Tab 1, Section 1 and 2 are 0
+Add `index` key of a section you want 
+For example Tab 1 has 2 children sections follow. They are Section 1 and Section 2 -> index of Tab 1, Section 1 and 2 are 0
 
 <img src="https://media.giphy.com/media/XOgtvUrZd2xxE3W1vu/giphy.gif" />
 
@@ -200,7 +197,7 @@ const dataSections = [
 
 const ScrollableTabStringDemo = () => (
     <ScrollableTabString
-        isParent
+        isParent //remember to add this
         dataTabs={tabNames}
         dataSections={dataSections}
         renderSection={(item) => (
