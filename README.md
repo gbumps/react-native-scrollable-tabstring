@@ -66,7 +66,9 @@ This component currently support tab list for **horizontal** side and vertical s
 
 Display a basic scrollable tab
 
-<!---Note: Length of `dataTabs` and `dataSections` must equal, otherwise may result in incorrect scrolling order`-->
+```text
+Note: Length of `dataTabs` and `dataSections` must equal, otherwise may result in incorrect scrolling order
+```
 
 <img src="https://media.giphy.com/media/4vMWOXJFB8Jks2K3Fl/giphy.gif" />
 
@@ -136,7 +138,8 @@ Scrollable tab with parent tab and children sections follow
 
 Use this if you want to support more sections following on a tab.
 
-Add `index` key of a section you want 
+Add `index` key of a section you want
+
 For example Tab 1 has 2 children sections follow. They are Section 1 and Section 2 -> index of Tab 1, Section 1 and 2 are 0
 
 <img src="https://media.giphy.com/media/XOgtvUrZd2xxE3W1vu/giphy.gif" />
