@@ -45,21 +45,21 @@ import ScrollableTabString from 'react-native-scrollable-tabstring';
 ## Component Detail
 This component currently support tab list for **horizontal** side and vertical section list. Both of which are __**[Flatlist](https://facebook.github.io/react-native/docs/flatlist)**__
 
-| Property            | Type    | Required |  Default   | Description |
-| ------------------- | ------- | -------- | ---------- |----------- |
-| dataTabs            | Array   | Yes      |     []     | A tab list to represent |
-| dataSections        | Array   | Yes      |     []     | A Section list to represent |
-| isParent            | Boolean | No       |   false    | A key to render Parent tab - children section, switch to `true` if you want to support more sections following a tab, see [here](https://github.com/hoangthongbui/react-native-scrollable-tabstring#scrollable-tab) on how to use it |
-| isAnimatedHeader    | Boolean | No       |   true     | Animation at tab header when section scrolling |
-| tabPosition         | String  | No       |   top      | Tab list position arrangement, `top` and `bottom` |
-| renderSectionItem   | Func    | Yes      |            | Function to render Section Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
-| renderTabNameItem   | Func    | Yes      |            | Function to render Tab Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
-| customTabNamesProps | Object  | No       |            | [Flalist](https://reactnative.dev/docs/flatlist) Props, avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result some issues |
-| customSectionProps  | Object  | No       |            | [Flalist](https://reactnative.dev/docs/flatlist) Props, avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result some issues |
-| onPressTab          | Func    | No       |            | Custom function when pressing on a tab |
-| onScrollSection     | Func    | No       |            | Custom function when section scrolling |
-| selectedTabStyle    | Object  | No       | `{ borderBottomColor: 'black', borderBottomWidth: 1, }` | Custom style when a tab is selected |
-| unselectedTabStyle  | Object  | No       | `{ backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', }` | Custom style when a tab is unselected | 
+| Property | Type | Required | Default | Description |
+| ------------------- | ------- | -------- | ---------- | ----------- |
+| dataTabs | Array | Yes | [] | A tab list to represent |
+| dataSections | Array | Yes | [] | A Section list to represent |
+| isParent | Boolean | No | false | Render more sections folling a parent tab, Switch to `true` if you want to support more sections following a tab, see detail [here](https://github.com/hoangthongbui/react-native-scrollable-tabstring#scrollable-tab-with-parent-tab) on how to use |
+| isAnimatedHeader | Boolean | No | true | Animation at tab header when section scrolling |
+| tabPosition | String | No | top | Tab list position arrangement, `top` and `bottom` |
+| renderSectionItem | Func | Yes | | Function to render Section Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
+| renderTabNameItem | Func | Yes | | Function to render Tab Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
+| customTabNamesProps | Object | No | | [Flalist](https://reactnative.dev/docs/flatlist) Props, avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result some issues |
+| customSectionProps  | Object  | No | | [Flalist](https://reactnative.dev/docs/flatlist) Props, avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result some issues |
+| onPressTab | Func | No | | Custom function when pressing on a tab |
+| onScrollSection | Func | No | | Custom function when section scrolling |
+| selectedTabStyle | Object | No | `{ borderBottomColor: 'black', borderBottomWidth: 1, }` | Custom style when a tab is selected |
+| unselectedTabStyle | Object | No | `{ backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', }` | Custom style when a tab is unselected | 
 
 ## Example
 ### Scrollable tab
