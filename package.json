@@ -1,40 +1,40 @@
 {
-    "name": "react-native-scrollable-tabstring",
-    "version": "3.1.2",
-    "private": false,
-    "description": "a scrollable list with animated horizontal tab when scrolling",
-    "main": "src/index.js",
-    "directories": {
-      "example": "examples"
-    },
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/hoangthongbui/react-native-scrollable-tabstring"
-    },
-    "keywords": [
-      "react",
-      "tabstring",
-      "native",
-      "scrollable",
-      "horizontal",
-      "animated",
-      "component",
-      "scrollview",
-      "ios",
-      "android"
-    ],
-    "author": "Thong Bui",
-    "license": "MIT",
-    "bugs": {
-      "url": "https://github.com/hoangthongbui/react-native-scrollable-tabstring/issues"
-    },
-    "homepage": "https://github.com/hoangthongbui/react-native-scrollable-tabstring/readme",
-    "dependencies": {
-        "prop-types": "^15.7.2",
-        "eslint": "7.10.0",
-        "prettier": "2.1.2"
-    }
+  "name": "react-native-scrollable-tabstring",
+  "version": "0.0.1",
+  "private": false,
+  "description": "a scrollable list with animated horizontal tab when scrolling",
+  "main": "src/index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoangthongbui/react-native-scrollable-tabstring.git"
+  },
+  "keywords": [
+    "react",
+    "tabstring",
+    "native",
+    "scrollable",
+    "horizontal",
+    "animated",
+    "component",
+    "scrollview",
+    "ios",
+    "android"
+  ],
+  "author": "Thong Bui",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hoangthongbui/react-native-scrollable-tabstring/issues"
+  },
+  "homepage": "https://github.com/hoangthongbui/react-native-scrollable-tabstring/blob/master/README.md",
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "eslint": "7.10.0",
+    "prettier": "2.1.2"
   }
+}
