@@ -56,13 +56,27 @@ class ScrollableTabString extends Component {
         this.onScroll = this.onScroll.bind(this);
     }
 
+    componentDidMount() {
+        const { dataSections, dataTabs, isParent } = this.props;
+
+        if (dataSections.length !== dataTabs.length && !isParent) {
+            console.warn(`The 'dataSections' and 'dataTabs' length are not equal. This will cause some issues, especially when the section list is scrolling. Consider number of items of those lists to be equal, or add 'isParent' param if you are supporting parent tab - children sections`);
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.dataSections.length > prevProps.dataSections.length) {
+            console.warn(`Are you loading more items on the dataSections ? This component does not support on load more yet. Refer here: `);
+        }
+    }
+
     goToIndex(item) {
         const { tabScrollMainRef, isPressToScroll, heightTabNames } = this;
         const { onPressTab } = this.props;
 
         isPressToScroll.current = true;
         const findMinYAxis = Math.min(...listViews.filter((i) => i.item.index === item.index).map((ii) => ii.y));
-        const res = listViews.find((i) => i.y === findMinYAxis);
+        const res = findMinYAxis && listViews.find((i) => i.y === findMinYAxis);
         tabScrollMainRef?.current?.scrollToOffset({ offset: res.y - (heightTabNames.current * 2) });
         this.setState({
             selectedScrollIndex: res.item.index
@@ -70,6 +84,7 @@ class ScrollableTabString extends Component {
         onPressTab && onPressTab(item);
     }
 
+    //map tab item
     dataTabNameChildren({ item, index }) {
         const { renderTabName, selectedTabStyle, unselectedTabStyle } = this.props;
         const { heightTabNames } = this;
@@ -89,6 +104,7 @@ class ScrollableTabString extends Component {
         );
     }
 
+    //map section item
     dataSectionsChildren({ item, index }) {
         const { renderSection, dataSections } = this.props;
 
@@ -100,7 +116,7 @@ class ScrollableTabString extends Component {
                         item: { ...item },
                         y: e.nativeEvent.layout.y,
                     });
-                    if (listViews.length === dataSections.length) {
+                    if (listViews.length >= dataSections.length) {
                         listViews.sort((a, b) => a.y - b.y);
                     }
                 }
@@ -169,6 +185,7 @@ class ScrollableTabString extends Component {
             <View style={{ flex: 1 }}>
                 <Animated.FlatList
                     {...customSectionProps}
+                    
                     style={{ flex: 1 }}
                     data={isParent ? dataSections : dataSections.map((i, index) => ({ ...i, index }))}
                     scrollEventThrottle={16}
@@ -201,7 +218,6 @@ class ScrollableTabString extends Component {
                             data={dataTabs.map((i, index) => ({ ...i, index }))}
                             {...customTabNamesProps}
                             ref={tabNamesRef}
-                            initialNumToRender={dataTabs.length}
                             keyExtractor={(item) => item.index}
                             keyboardShouldPersistTaps="always"
                             showsHorizontalScrollIndicator={false}
