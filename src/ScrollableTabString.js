@@ -66,7 +66,7 @@ class ScrollableTabString extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.dataSections.length > prevProps.dataSections.length) {
-            console.warn(`Are you loading more items on the dataSections ? This component does not support on load more yet. Refer here: `);
+            console.warn(`Are you loading more items on the dataSections ? This component does not support on load more yet. Refer here: https://github.com/hoangthongbui/react-native-scrollable-tabstring#limitation`);
         }
     }
 

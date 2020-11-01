@@ -22,7 +22,7 @@ $ yarn add react-native-scrollable-tabstring
 ## Usage
 
 Start using the components or try it on Snack
-[here](https://snack.expo.io/xqjqcNMwD).
+[here](https://snack.expo.io/@thongbui/rn-scrollable-tabstring).
 
 ```js
 import ScrollableTabString from 'react-native-scrollable-tabstring';
