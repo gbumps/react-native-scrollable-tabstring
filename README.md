@@ -236,6 +236,12 @@ const ScrollableTabStringDemo = () => (
     />
 );
 ```
+
+## Limitation
+This component allows you to customize some Flatlist props as well. However, you should avoid some of properties like `onScroll`, `renderItem`, `CellRendererComponent`, `horizontal` as may result some issues.
+
+Furthermore, this component doesn't support on load more yet due to heavily calculated, still working on this :p
+
 ## Contributing
 All contributions are welcome! Please open an issue if you get stuck and bugs, or a PR if you have any feature idea, improvements and bug fixing. I'm very appreciate ! 
 
