@@ -1,6 +1,6 @@
 {
   "name": "react-native-scrollable-tabstring",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "description": "a scrollable list with animated horizontal tab when scrolling",
   "main": "src/index.js",
@@ -16,8 +16,13 @@
   },
   "keywords": [
     "react",
-    "tabstring",
     "native",
+    "tab",
+    "scroll",
+    "string",
+    "navigator",
+    "tabstring",
+    "stringtab",
     "scrollable",
     "horizontal",
     "animated",
