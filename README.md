@@ -4,9 +4,9 @@
   <a href="https://aleen42.github.io/badges/src/eslint.svg"><img src="https://aleen42.github.io/badges/src/eslint.svg"></a>
 </p>
 
-<img src="https://media.giphy.com/media/4vMWOXJFB8Jks2K3Fl/giphy.gif" />
-
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+<img src="https://media.giphy.com/media/4vMWOXJFB8Jks2K3Fl/giphy.gif" />
 
 A ScrollView-like component with animated horizontal tab when scrolling
 
@@ -52,7 +52,7 @@ This component currently support tab list for **horizontal** side and vertical s
 | dataTabs | Array | Yes | [] | A tab list to represent |
 | dataSections | Array | Yes | [] | A Section list to represent |
 | isParent | Boolean | No | false | Switch to `true` if you want to support more sections following by a parent tab, see detail [here](https://github.com/hoangthongbui/react-native-scrollable-tabstring#scrollable-tab-with-parent-tab) |
-| isAnimatedHeader | Boolean | No | true | Animation at tab header when section scrolling |
+| headerTransitionWhenScroll | Boolean | No | true | Animation at tab header when section scrolling |
 | tabPosition | String | No | top | Tab list position arrangement, `top` and `bottom` |
 | renderSectionItem | Func | Yes | | Function to render Section Item |
 | renderTabNameItem | Func | Yes | | Function to render Tab Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
