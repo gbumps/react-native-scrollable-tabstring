@@ -31,6 +31,10 @@ const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
 const listViews = [];
 
 class ScrollableTabString extends Component {
+
+    static TAB_POSITION_TOP = 'top'
+    static TAB_POSITION_BOTTOM = 'bottom'
+
     constructor(props) {
         super(props);
         this.state = {
@@ -46,7 +50,7 @@ class ScrollableTabString extends Component {
     }
 
     componentDidMount() {
-        const { dataSections, dataTabs, isParent } = this.props;
+        const { dataSections, dataTabs, isParent, tabPostion } = this.props;
 
         if (dataSections.length !== dataTabs.length && !isParent) {
             console.warn('The \'dataSections\' and \'dataTabs\''
@@ -54,6 +58,14 @@ class ScrollableTabString extends Component {
             + ' Consider number of items of those lists to be equal, or add \'isParent\''
             + ' param if you are supporting parent tab - children sections');
         }
+        
+        if (tabPostion && 
+            (tabPostion !== ScrollableTabString.TAB_POSITION_BOTTOM) 
+            || 
+            (tabPostion !== ScrollableTabString.TAB_POSITION_TOP)) 
+        {
+            console.warn('The tabPosition only accept \'top\' or \'bottom\' only !')
+        } 
     }
 
     componentDidUpdate(prevProps) {
