@@ -6,16 +6,16 @@ interface ScrollableTabStringProps {
     dataTabs: Array<Object>,
     dataSections: Array<Object>,
     isParent: boolean,
-    isAnimatedHeader: boolean,
+    headerTransitionWhenScroll: boolean,
     tabPosition?: 'top' | 'bottom',
-    renderSectionItem: Function,
-    renderTabNameItem: Function,
     customTabNamesProps: FlatListProps<Object>,
     customSectionProps: FlatListProps<Object>,
-    onPressTab: Function,
-    onScrollSection: Function,
     selectedTabStyle: StyleProp<ViewStyle>,
     unselectedTabStyle: StyleProp<ViewStyle>,
+    onPressTab: Function,
+    onScrollSection: Function,
+    renderSectionItem: Function,
+    renderTabNameItem: Function,
   }
   
   export class ScrollableTabString extends React.Component<ScrollableTabStringProps> { }
