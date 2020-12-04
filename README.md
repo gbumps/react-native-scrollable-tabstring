@@ -6,6 +6,8 @@
 
 <img src="https://media.giphy.com/media/4vMWOXJFB8Jks2K3Fl/giphy.gif" />
 
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
 A ScrollView-like component with animated horizontal tab when scrolling
 
 # Get started
@@ -52,10 +54,10 @@ This component currently support tab list for **horizontal** side and vertical s
 | isParent | Boolean | No | false | Switch to `true` if you want to support more sections following by a parent tab, see detail [here](https://github.com/hoangthongbui/react-native-scrollable-tabstring#scrollable-tab-with-parent-tab) |
 | isAnimatedHeader | Boolean | No | true | Animation at tab header when section scrolling |
 | tabPosition | String | No | top | Tab list position arrangement, `top` and `bottom` |
-| renderSectionItem | Func | Yes | | Function to render Section Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
+| renderSectionItem | Func | Yes | | Function to render Section Item |
 | renderTabNameItem | Func | Yes | | Function to render Tab Item, equal to [renderItem](https://reactnative.dev/docs/flatlist#renderitem) in `Flatlist` |
-| customTabNamesProps | Object | No | | [Flatlist](https://reactnative.dev/docs/flatlist) Props, avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result some issues |
-| customSectionProps  | Object  | No | | [Flatlist](https://reactnative.dev/docs/flatlist) Props, avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result some issues |
+| customTabNamesProps | Object | No | | [Flatlist](https://reactnative.dev/docs/flatlist) Props, avoid props like `renderItem`, `data`, `ref`, `onScroll` as may result some issues  |
+| customSectionProps | Object | No | | [ScrollView](https://reactnative.dev/docs/scrollview) Props |
 | onPressTab | Func | No | | Custom function when pressing on a tab |
 | onScrollSection | Func | No | | Custom function when section scrolling |
 | selectedTabStyle | Object | No | `{ borderBottomColor: 'black', borderBottomWidth: 1, }` | Custom style when a tab is selected |
@@ -238,7 +240,7 @@ const ScrollableTabStringDemo = () => (
 ```
 
 ## Limitation
-This component allows you to customize some Flatlist props as well. However, you should avoid some of properties like `onScroll`, `renderItem`, `CellRendererComponent`, `horizontal` as may result some issues.
+This component allows you to customize some Flatlist props on Tab Name and ScrollView props as well. However, you should avoid some of properties like `onScroll`, `renderItem`, `CellRendererComponent`, `horizontal` as may result some issues.
 
 Furthermore, this component doesn't support on load more yet due to heavily calculated, still working on this :p
 

@@ -1,20 +1,11 @@
 import React, { Component } from 'react';
 import {
     Animated,
-    View,
     Platform,
-    StyleSheet
+    View
 } from 'react-native';
 
 import PropTypes from 'prop-types';
-
-const styles = StyleSheet.create({
-    horizontalTabStyle: {
-        backgroundColor: 'white',
-        alignItems: 'center',
-        width: '100%'
-    }
-});
 
 const binarySearch = (arr, element) => {
     let right = arr.length - 1;
@@ -44,11 +35,9 @@ class ScrollableTabString extends Component {
         super(props);
         this.state = {
             selectedScrollIndex: 0,
+            isPressToScroll: false,
         };
-        this.tabNamesRef = React.createRef(null);
-        this.tabScrollMainRef = React.createRef(null);
-        this.heightTabNames = React.createRef(0);
-        this.isPressToScroll = React.createRef(false);
+        this.heightTabNames = 0;
 
         this.goToIndex = this.goToIndex.bind(this);
         this.dataTabNameChildren = this.dataTabNameChildren.bind(this);
@@ -60,31 +49,38 @@ class ScrollableTabString extends Component {
         const { dataSections, dataTabs, isParent } = this.props;
 
         if (dataSections.length !== dataTabs.length && !isParent) {
-            console.warn(`The 'dataSections' and 'dataTabs' length are not equal. This will cause some issues, especially when the section list is scrolling. Consider number of items of those lists to be equal, or add 'isParent' param if you are supporting parent tab - children sections`);
+            console.warn('The \'dataSections\' and \'dataTabs\''
+            + ' length are not equal. This will cause some issues, especially when the section list is scrolling.'
+            + ' Consider number of items of those lists to be equal, or add \'isParent\''
+            + ' param if you are supporting parent tab - children sections');
         }
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.dataSections.length > prevProps.dataSections.length) {
-            console.warn(`Are you loading more items on the dataSections ? This component does not support on load more yet. Refer here: https://github.com/hoangthongbui/react-native-scrollable-tabstring#limitation`);
+        const { dataSections } = this.props;
+
+        if (dataSections.length > prevProps.dataSections.length) {
+            console.warn('Are you loading more items on the dataSections ? This component does not support on load more yet !');
         }
     }
 
     goToIndex(item) {
-        const { tabScrollMainRef, isPressToScroll, heightTabNames } = this;
         const { onPressTab } = this.props;
 
-        isPressToScroll.current = true;
+        this.setState({ isPressToScroll: true });
+
         const findMinYAxis = Math.min(...listViews.filter((i) => i.item.index === item.index).map((ii) => ii.y));
         const res = findMinYAxis && listViews.find((i) => i.y === findMinYAxis);
-        tabScrollMainRef?.current?.scrollToOffset({ offset: res.y - (heightTabNames.current * 2) });
+
+        this.tabScrollMainRef?.getNode().scrollTo({ animated: true, y: res?.y || 0 });
         this.setState({
-            selectedScrollIndex: res.item.index
+            selectedScrollIndex: res?.item?.index || 0
         });
+
         onPressTab && onPressTab(item);
     }
 
-    //map tab item
+    // map tab item
     dataTabNameChildren({ item, index }) {
         const { renderTabName, selectedTabStyle, unselectedTabStyle } = this.props;
         const { heightTabNames } = this;
@@ -96,16 +92,16 @@ class ScrollableTabString extends Component {
                 style: { ...(index === selectedScrollIndex) ? selectedTabStyle : unselectedTabStyle },
                 onPress: () => this.goToIndex(item),
                 onLayout: (e) => {
-                    if (heightTabNames.current === 0) {
-                        heightTabNames.current = e.nativeEvent.layout.height;
+                    if (heightTabNames === 0) {
+                        this.heightTabNames = e.nativeEvent.layout.height;
                     }
                 }
             })
         );
     }
 
-    //map section item
-    dataSectionsChildren({ item, index }) {
+    // map section item
+    dataSectionsChildren(item, index) {
         const { renderSection, dataSections } = this.props;
 
         return React.Children.map(
@@ -125,46 +121,62 @@ class ScrollableTabString extends Component {
     }
 
     onScroll(e) {
-        const { onScrollSection, dataTabs, isAnimatedHeader } = this.props;
-        const { tabNamesRef, isPressToScroll } = this;
-        const { selectedScrollIndex } = this.state;
+        const { onScrollSection, dataTabs, headerTransitionWhenScroll } = this.props;
+        const { selectedScrollIndex, isPressToScroll } = this.state;
 
         onScrollSection && onScrollSection(e);
-        if (!isPressToScroll.current && isAnimatedHeader) {
-            if (e.nativeEvent.contentOffset.y === 0) {
-                tabNamesRef?.current?.scrollToOffset({
-                    offset: 0,
-                    animated: Platform.OS === 'ios',
-                    viewPosition: 0.5,
-                });
-                this.setState({
-                    selectedScrollIndex: 0,
-                });
-            } else if (isCloseToBottom(e.nativeEvent)) {
-                const lastIndex = dataTabs.length - 1;
-                tabNamesRef?.current?.scrollToIndex({
-                    animated: Platform.OS === 'ios',
-                    index: lastIndex,
-                    viewPosition: 0.5,
-                });
-                this.setState({
-                    selectedScrollIndex: lastIndex
-                });
-            } else {
-                const res = binarySearch(listViews, e.nativeEvent.contentOffset.y);
-                const indexToScrollTo = res.includes(-1)
-                    ? listViews[Math.max(...res)]?.item?.index
-                    : Math.max(listViews[res[0]]?.item?.index, listViews[res[1]]?.item?.index);
-                if (indexToScrollTo && indexToScrollTo !== -1 && indexToScrollTo !== selectedScrollIndex) {
-                    tabNamesRef?.current?.scrollToIndex({
+
+        if (!isPressToScroll && headerTransitionWhenScroll) {
+            try {
+                if (e.nativeEvent.contentOffset.y === 0) {
+                    this.tabNamesRef?.getNode().scrollToOffset({
+                        offset: 0,
                         animated: Platform.OS === 'ios',
-                        index: indexToScrollTo,
                         viewPosition: 0.5,
                     });
+
                     this.setState({
-                        selectedScrollIndex: indexToScrollTo
+                        selectedScrollIndex: 0,
                     });
+                } else if (isCloseToBottom(e.nativeEvent)) {
+                    const lastIndex = dataTabs.length - 1;
+
+                    this.tabNamesRef?.getNode().scrollToIndex({
+                        animated: Platform.OS === 'ios',
+                        index: lastIndex,
+                        viewPosition: 0.5,
+                    });
+
+                    this.setState({
+                        selectedScrollIndex: lastIndex
+                    });
+                } else {
+                    const res = binarySearch(listViews, e.nativeEvent.contentOffset.y);
+
+                    const indexToScrollTo = res.includes(-1)
+                        ? listViews[Math.max(...res)]?.item?.index
+                        : Math.max(
+                            listViews[res[0]]?.item?.index,
+                            listViews[res[1]]?.item?.index
+                        );
+
+                    if (
+                        indexToScrollTo
+                        && indexToScrollTo !== -1
+                        && indexToScrollTo !== selectedScrollIndex) {
+                        this.tabNamesRef?.getNode().scrollToIndex({
+                            animated: Platform.OS === 'ios',
+                            index: indexToScrollTo,
+                            viewPosition: 0.5,
+                        });
+
+                        this.setState({
+                            selectedScrollIndex: indexToScrollTo
+                        });
+                    }
                 }
+            } catch (err) {
+                console.warn('err: ', err);
             }
         }
     }
@@ -178,58 +190,69 @@ class ScrollableTabString extends Component {
             customSectionProps,
             customTabNamesProps,
         } = this.props;
-        const {
-            tabScrollMainRef, isPressToScroll, dataSectionsChildren, dataTabNameChildren, tabNamesRef, onScroll
-        } = this;
         return (
-            <View style={{ flex: 1 }}>
-                <Animated.FlatList
+            <>
+                <Animated.ScrollView
                     {...customSectionProps}
-                    
-                    style={{ flex: 1 }}
-                    data={isParent ? dataSections : dataSections.map((i, index) => ({ ...i, index }))}
                     scrollEventThrottle={16}
-                    ref={tabScrollMainRef}
+                    ref={(ref) => { this.tabScrollMainRef = ref; }}
                     bounces={false}
-                    onScrollBeginDrag={() => isPressToScroll.current = false}
+                    onScrollBeginDrag={() => this.setState({ isPressToScroll: false })}
+                    nestedScrollEnabled
                     showsVerticalScrollIndicator={false}
-                    onScroll={onScroll}
+                    scrollEnabled
+                    onScroll={this.onScroll}
                     stickyHeaderIndices={tabPosition === 'top' ? [0] : null}
-                    CellRendererComponent={dataSectionsChildren}
-                    ListHeaderComponent={tabPosition === 'top' ? (
-                        <Animated.FlatList
-                            data={dataTabs.map((i, index) => ({ ...i, index }))}
-                            {...customTabNamesProps}
-                            ref={tabNamesRef}
-                            keyExtractor={(item) => item.index}
-                            keyboardShouldPersistTaps="always"
-                            showsHorizontalScrollIndicator={false}
-                            bounces={false}
-                            contentContainerStyle={styles.horizontalTabStyle}
-                            horizontal
-                            renderItem={dataTabNameChildren}
-                        />
-                    ) : null}
-                />
+                >
+                    {
+                        (tabPosition === 'top' ? (
+                            <View>
+                                <Animated.FlatList
+                                    data={dataTabs.map((i, index) => ({ ...i, index }))}
+                                    nestedScrollEnabled
+                                    keyboardShouldPersistTaps="always"
+                                    {...customTabNamesProps}
+                                    ref={(ref) => { this.tabNamesRef = ref; }}
+                                    keyExtractor={(item) => item.index}
+                                    contentContainerStyle={{
+                                        backgroundColor: 'white',
+                                    }}
+                                    showsHorizontalScrollIndicator={false}
+                                    bounces={false}
+                                    horizontal
+                                    renderItem={this.dataTabNameChildren}
+                                />
+                            </View>
+                        ) : null)
+                    }
+                    <View>
+                        { (isParent ? dataSections : dataSections.map((i, index) => ({ ...i, index }))).map(this.dataSectionsChildren) }
+                    </View>
+                </Animated.ScrollView>
                 {
                     (tabPosition === 'bottom' ? (
-                        <Animated.FlatList
-                            style={{ position: 'absolute', bottom: 0 }}
-                            data={dataTabs.map((i, index) => ({ ...i, index }))}
-                            {...customTabNamesProps}
-                            ref={tabNamesRef}
-                            keyExtractor={(item) => item.index}
-                            keyboardShouldPersistTaps="always"
-                            showsHorizontalScrollIndicator={false}
-                            bounces={false}
-                            contentContainerStyle={styles.horizontalTabStyle}
-                            horizontal
-                            renderItem={dataTabNameChildren}
-                        />
+                        <View>
+                            <Animated.FlatList
+                                style={{ position: 'absolute', bottom: 0 }}
+                                keyboardShouldPersistTaps="always"
+                                nestedScrollEnabled
+                                data={dataTabs.map((i, index) => ({ ...i, index }))}
+                                {...customTabNamesProps}
+                                contentContainerStyle={{
+                                    backgroundColor: 'white',
+                                }}
+                                ref={(ref) => { this.tabNamesRef = ref; }}
+                                keyExtractor={(item) => item.index}
+                                showsHorizontalScrollIndicator={false}
+                                bounces={false}
+                                horizontal
+                                renderItem={this.dataTabNameChildren}
+                            />
+                        </View>
+
                     ) : null)
                 }
-            </View>
-
+            </>
         );
     }
 }
@@ -238,7 +261,7 @@ ScrollableTabString.propTypes = {
     dataTabs: PropTypes.array,
     dataSections: PropTypes.array,
     isParent: PropTypes.bool,
-    isAnimatedHeader: PropTypes.bool,
+    headerTransitionWhenScroll: PropTypes.bool,
     tabPosition: PropTypes.oneOf(['top', 'bottom']),
     renderSection: PropTypes.func,
     renderTabName: PropTypes.func,
@@ -254,7 +277,7 @@ ScrollableTabString.defaultProps = {
     dataSections: [],
     dataTabs: [],
     isParent: false,
-    isAnimatedHeader: true,
+    headerTransitionWhenScroll: true,
     tabPosition: 'top',
     selectedTabStyle: {
         borderBottomColor: 'black',
