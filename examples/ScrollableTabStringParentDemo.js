@@ -1,7 +1,6 @@
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../..';
-import Text from '../typography';
 import ScrollableTabString from './ScrollableTabString';
 
 const tabNames = [{
@@ -286,11 +285,11 @@ const dataMain = [
 const ScrollableTabStringDemo = () => (
     <ScrollableTabString
         isParent
-        dataTabNames={tabNames}
+        dataTabs={tabNames}
         dataSections={dataMain}
         renderSection={(item) => (
             <View>
-                <Text.H3>{item.name}</Text.H3>
+                <Text>{item.name}</Text>
                 {
                     item.data.map((i) => (
                         <Text key={i.id} style={{ padding: 20 }}>{i.name}</Text>
@@ -300,9 +299,9 @@ const ScrollableTabStringDemo = () => (
         )}
         renderTabName={(item) => (
             <TouchableOpacity>
-                <Text.H4 style={{ padding: 10 }}>
+                <Text style={{ padding: 10 }}>
                     {item.title}
-                </Text.H4>
+                </Text>
             </TouchableOpacity>
         )}
         selectedTabStyle={{
