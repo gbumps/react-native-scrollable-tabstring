@@ -103,7 +103,7 @@ render () {
             dataSections={dataSections}
             renderSection={(item) => (
                 <View>
-                    <Text.H3>{item.name}</Text.H3>
+                    <Text>{item.name}</Text>
                     {
                         item.data.map((i) => (
                             <Text key={i.id} style={{ padding: 20 }}>{i.name}</Text>
@@ -113,9 +113,9 @@ render () {
             )}
             renderTabName={(item) => (
                 <TouchableOpacity>
-                    <Text.H4 style={{ padding: 10 }}>
+                    <Text style={{ padding: 10 }}>
                         {item.title}
-                    </Text.H4>
+                    </Text>
                 </TouchableOpacity>
             )}
             selectedTabStyle={{
@@ -209,7 +209,7 @@ const ScrollableTabStringDemo = () => (
         dataSections={dataSections}
         renderSection={(item) => (
             <View>
-                <Text.H3>{item.name}</Text.H3>
+                <Text>{item.name}</Text>
                 {
                     item.data.map((i) => (
                         <Text key={i.id} style={{ padding: 20 }}>{i.name}</Text>
@@ -219,9 +219,9 @@ const ScrollableTabStringDemo = () => (
         )}
         renderTabName={(item) => (
             <TouchableOpacity>
-                <Text.H4 style={{ padding: 10 }}>
+                <Text style={{ padding: 10 }}>
                     {item.title}
-                </Text.H4>
+                </Text>
             </TouchableOpacity>
         )}
         selectedTabStyle={{
