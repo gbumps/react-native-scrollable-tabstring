@@ -50,7 +50,7 @@ class ScrollableTabString extends Component {
     }
 
     componentDidMount() {
-        const { dataSections, dataTabs, isParent, tabPostion } = this.props;
+        const { dataSections, dataTabs, isParent, tabPosition } = this.props;
 
         if (dataSections.length !== dataTabs.length && !isParent) {
             console.warn('The \'dataSections\' and \'dataTabs\''
@@ -59,11 +59,7 @@ class ScrollableTabString extends Component {
             + ' param if you are supporting parent tab - children sections');
         }
         
-        if (tabPostion && 
-            (tabPostion !== ScrollableTabString.TAB_POSITION_BOTTOM) 
-            || 
-            (tabPostion !== ScrollableTabString.TAB_POSITION_TOP)) 
-        {
+        if (tabPosition &&  (tabPosition !== ScrollableTabString.TAB_POSITION_BOTTOM)  &&  (tabPosition !== ScrollableTabString.TAB_POSITION_TOP))  {
             console.warn('The tabPosition only accept \'top\' or \'bottom\' only !')
         } 
     }
@@ -84,7 +80,7 @@ class ScrollableTabString extends Component {
         const findMinYAxis = Math.min(...listViews.filter((i) => i.item.index === item.index).map((ii) => ii.y));
         const res = findMinYAxis && listViews.find((i) => i.y === findMinYAxis);
 
-        this.tabScrollMainRef?.getNode().scrollTo({ animated: true, y: res?.y || 0 });
+        this.tabScrollMainRef?.scrollTo({ animated: true, y: res?.y || 0 });
         this.setState({
             selectedScrollIndex: res?.item?.index || 0
         });
@@ -141,7 +137,7 @@ class ScrollableTabString extends Component {
         if (!isPressToScroll && headerTransitionWhenScroll) {
             try {
                 if (e.nativeEvent.contentOffset.y === 0) {
-                    this.tabNamesRef?.getNode().scrollToOffset({
+                    this.tabNamesRef?.scrollToOffset({
                         offset: 0,
                         animated: Platform.OS === 'ios',
                         viewPosition: 0.5,
@@ -153,7 +149,7 @@ class ScrollableTabString extends Component {
                 } else if (isCloseToBottom(e.nativeEvent)) {
                     const lastIndex = dataTabs.length - 1;
 
-                    this.tabNamesRef?.getNode().scrollToIndex({
+                    this.tabNamesRef?.scrollToIndex({
                         animated: Platform.OS === 'ios',
                         index: lastIndex,
                         viewPosition: 0.5,
@@ -176,7 +172,7 @@ class ScrollableTabString extends Component {
                         indexToScrollTo
                         && indexToScrollTo !== -1
                         && indexToScrollTo !== selectedScrollIndex) {
-                        this.tabNamesRef?.getNode().scrollToIndex({
+                        this.tabNamesRef?.scrollToIndex({
                             animated: Platform.OS === 'ios',
                             index: indexToScrollTo,
                             viewPosition: 0.5,
@@ -254,7 +250,7 @@ class ScrollableTabString extends Component {
                                     backgroundColor: 'white',
                                 }}
                                 ref={(ref) => { this.tabNamesRef = ref; }}
-                                keyExtractor={(item) => item.index}
+                                keyExtractor={(item) => item.index.toString()}
                                 showsHorizontalScrollIndicator={false}
                                 bounces={false}
                                 horizontal
