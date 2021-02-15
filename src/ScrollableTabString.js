@@ -254,7 +254,7 @@ class ScrollableTabString extends Component {
                                     backgroundColor: 'white',
                                 }}
                                 ref={(ref) => { this.tabNamesRef = ref; }}
-                                keyExtractor={(item) => item.index}
+                                keyExtractor={(item) => item.index.toString()}
                                 showsHorizontalScrollIndicator={false}
                                 bounces={false}
                                 horizontal
