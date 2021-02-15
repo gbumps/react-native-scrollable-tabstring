@@ -84,7 +84,7 @@ class ScrollableTabString extends Component {
         const findMinYAxis = Math.min(...listViews.filter((i) => i.item.index === item.index).map((ii) => ii.y));
         const res = findMinYAxis && listViews.find((i) => i.y === findMinYAxis);
 
-        this.tabScrollMainRef?.getNode().scrollTo({ animated: true, y: res?.y || 0 });
+        this.tabScrollMainRef?.scrollTo({ animated: true, y: res?.y || 0 });
         this.setState({
             selectedScrollIndex: res?.item?.index || 0
         });
@@ -141,7 +141,7 @@ class ScrollableTabString extends Component {
         if (!isPressToScroll && headerTransitionWhenScroll) {
             try {
                 if (e.nativeEvent.contentOffset.y === 0) {
-                    this.tabNamesRef?.getNode().scrollToOffset({
+                    this.tabNamesRef?.scrollToOffset({
                         offset: 0,
                         animated: Platform.OS === 'ios',
                         viewPosition: 0.5,
@@ -153,7 +153,7 @@ class ScrollableTabString extends Component {
                 } else if (isCloseToBottom(e.nativeEvent)) {
                     const lastIndex = dataTabs.length - 1;
 
-                    this.tabNamesRef?.getNode().scrollToIndex({
+                    this.tabNamesRef?.scrollToIndex({
                         animated: Platform.OS === 'ios',
                         index: lastIndex,
                         viewPosition: 0.5,
@@ -176,7 +176,7 @@ class ScrollableTabString extends Component {
                         indexToScrollTo
                         && indexToScrollTo !== -1
                         && indexToScrollTo !== selectedScrollIndex) {
-                        this.tabNamesRef?.getNode().scrollToIndex({
+                        this.tabNamesRef?.scrollToIndex({
                             animated: Platform.OS === 'ios',
                             index: indexToScrollTo,
                             viewPosition: 0.5,
