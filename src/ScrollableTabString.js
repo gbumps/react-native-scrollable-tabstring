@@ -50,7 +50,7 @@ class ScrollableTabString extends Component {
     }
 
     componentDidMount() {
-        const { dataSections, dataTabs, isParent, tabPostion } = this.props;
+        const { dataSections, dataTabs, isParent, tabPosition } = this.props;
 
         if (dataSections.length !== dataTabs.length && !isParent) {
             console.warn('The \'dataSections\' and \'dataTabs\''
@@ -59,11 +59,7 @@ class ScrollableTabString extends Component {
             + ' param if you are supporting parent tab - children sections');
         }
         
-        if (tabPostion && 
-            (tabPostion !== ScrollableTabString.TAB_POSITION_BOTTOM) 
-            || 
-            (tabPostion !== ScrollableTabString.TAB_POSITION_TOP)) 
-        {
+        if (tabPosition &&  (tabPosition !== ScrollableTabString.TAB_POSITION_BOTTOM)  &&  (tabPosition !== ScrollableTabString.TAB_POSITION_TOP))  {
             console.warn('The tabPosition only accept \'top\' or \'bottom\' only !')
         } 
     }
